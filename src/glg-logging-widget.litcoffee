@@ -10,7 +10,7 @@ Otherwise, explicitly set them both and then call ```postData()```
 
 ## Dependencies
 
-    Polymer 'logging-widget',
+    Polymer 'glg-logging-widget',
 
 ##Attributes
 
@@ -39,6 +39,7 @@ Destination to post messages to
 ## Methods
 
 ###postData POSTs data to the service
+
 Example:
 
 ```

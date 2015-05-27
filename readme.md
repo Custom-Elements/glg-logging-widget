@@ -1,4 +1,4 @@
-# logging-widget
+# &lt;glg-logging-widget&gt;
 Wraps data with some metadata (timestamp, current user, channel)
 and then posts it as JSON to a logging services
 
@@ -21,7 +21,8 @@ Destination to post messages to
 
 ## Events
 
-###log-status gets fired with the response from the service
+###log-status
+gets fired with the response from the service
 
 ## Methods
 

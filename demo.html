@@ -2,9 +2,9 @@
 
 <html>
   <head>
-    <title>logging-widget</title>
+    <title>glg-logging-widget</title>
     <link rel="import" href="node_modules/polymer/polymer.html">
-    <link rel="import" href="src/logging-widget.html">
+    <link rel="import" href="src/glg-logging-widget.html">
     <style>
       body {
         font-family: "Helvetica Neue", "Helvetica", Arial;
@@ -22,13 +22,13 @@
 
   <body unresolved>
     <div id="holder">
-        <logging-widget channel="my-app" url="http://jobs.glgresearch.com/jlevy-logging-experiment/" id="lw1"/>
-        <logging-widget channel="my-app" url="http://jobs.glgresearch.com/jlevy-logging-experiment/" data="hello" id="lw2"/>
+        <glg-logging-widget channel="my-app" url="http://jobs.glgresearch.com/jlevy-logging-experiment/" id="lw1"/>
+        <glg-logging-widget channel="my-app" url="http://jobs.glgresearch.com/jlevy-logging-experiment/" data="hello" id="lw2"/>
     </div>
 
     <script>
       document.addEventListener('polymer-ready', function() {
-      document.querySelectorAll('logging-widget').array().forEach(
+      document.querySelectorAll('glg-logging-widget').array().forEach(
         function(w) {
           w.addEventListener('log-status', function(evt) {
             if (evt.srcElement == w) {
