@@ -1,62 +1,49 @@
-# &lt;glg-current-user&gt;
+# logging-widget
+Wraps data with some metadata (timestamp, current user, channel)
+and then posts it as JSON to a logging services
 
-Renders the body content if, and only if, there is a current authenticated user present. The current user is
-exposed to the context. Reads the local authentication cookie, and only works internally.
+## usage:
+If ```url``` and ```data``` are both set statically,
+the widget will automatically POST when it is ready.
 
-See [src/glg-current-user.litcoffee](src/glg-current-user.litcoffee) for more details.
+Otherwise, explicitly set them both and then call ```postData()```
 
+##Attributes
 
-## Available Properties
+###channel
+Tag for this data, get written in the wrapper that gets posted with each message
 
-  * firstName
-  * middleInitial
-  * lastName
-  * loginName
-  * email
-  * personId
-  * title
-  * phoneMain
-  * extension
-  * fax
-  * street1
-  * street2
-  * city
-  * state
-  * zip
-  * userId (number)
-  * personId (number)
-  * phone
-  * mobile
-  * betagroups (array)
+###data:
+Content to post.  Needs to be JSON.stringify-able
 
-### Typical Usage
+###url:
+Destination to post messages to
 
-```html
-  <glg-current-user>
-    <span>Welcome <b>{{ firstName }}</b> from {{ city }}!</span>
-  </glg-current-user>
+## Events
+
+###log-status gets fired with the response from the service
+
+## Methods
+
+###postData POSTs data to the service
+
+Example:
+
+```
+@channel = "my-app";
+@data = {
+    "xyz": 999
+}
 ```
 
-### Usage from Outside
-
-#### `currentuser`
-
-Bind to the `currentuser` attribute of a `glg-current-user`
-element to access the current user from outside the element like so:
-
-```html
-  <glg-current-user currentuser="{{currentuser}}"></glg-current-user>
+The posted data could look like this:
 ```
-
-#### `user` event
-
-Subscribe to the `user` event and read the user off the detail. See demo
-for exciting details!
-
-### Debugging
-
-Both `glg-user` and `glg-current-user` have debug properties.
-
-Assign to `window.debugUserName` to force the `glg-current-user` username.
-Assign to `window.glgUserCache[USERNAMEHERE]` to force the `glg-user`
-`currentuser` property.
+{
+  "channel": "my-app",
+  "version": 1,
+  "when": 1432754561620,
+  "data": {
+      "xyz": 999
+  }
+}
+```
