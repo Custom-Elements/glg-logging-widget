@@ -1,5 +1,5 @@
 {
-  "name": "logging-widget",
+  "name": "glg-logging-widget",
   "version": "0.0.1",
   "dependencies": {
     "polymer": "git://github.com/custom-elements/polymer#master",
