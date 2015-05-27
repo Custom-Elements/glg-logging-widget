@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>logging-widget</title>
+    <link rel="import" href="node_modules/polymer/polymer.html">
+    <link rel="import" href="src/logging-widget.html">
+    <style>
+      body {
+        font-family: "Helvetica Neue", "Helvetica", Arial;
+      }
+
+      small {
+        font-size: 50%;
+      }
+
+      h3 {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+
+  <body unresolved>
+    <div id="holder">
+        <logging-widget channel="my-app" url="http://jobs.glgresearch.com/jlevy-logging-experiment/" id="lw1"/>
+        <logging-widget channel="my-app" url="http://jobs.glgresearch.com/jlevy-logging-experiment/" data="hello" id="lw2"/>
+    </div>
+
+    <script>
+      document.addEventListener('polymer-ready', function() {
+      document.querySelectorAll('logging-widget').array().forEach(
+        function(w) {
+          w.addEventListener('log-status', function(evt) {
+            if (evt.srcElement == w) {
+              console.log("Listener ", w, " fired log-status event ", evt)
+            }
+          })
+        })
+        // Read the currentuser property when ready.
+      });
+    </script>
+  </body>
+</html>

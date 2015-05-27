@@ -1,0 +1,19 @@
+<link rel="import" href="../node_modules/core-ajax-npm/core-ajax.html">
+<link rel="import" href="https://services.glgresearch.com/ui-toolkit/node_modules/glg-current-user/src/glg-current-user.html">
+<polymer-element name="logging-widget" attributes="channel data url">
+  <template>
+    <glg-current-user id="gcu">
+    <core-ajax
+    id="ajax"
+    auto=false
+    handleAs="json"
+    withCredentials=true
+    method="POST"
+    url="{{url}}"
+    on-core-response="{{postHandler}}"
+    contentType="application/json">
+    </core-ajax>
+    <content></content>
+  </template>
+  <script src="./logging-widget.litcoffee"></script>
+</polymer-element>
