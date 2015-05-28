@@ -40,6 +40,8 @@ Destination to post messages to
 
 ###postData POSTs data to the service
 
+If you call will no arguments, @data is sent.  Or you can explicitly pass in the data to send.
+
 Example:
 
 ```
@@ -61,13 +63,15 @@ The posted data could look like this:
 }
 ```
 
-      postData : ->
-        if @data? && @url?
+      postData : (obj) ->
+        if (!obj?)
+          obj = @data
+        if obj? && @url?
           data = {"channel": @channel,
           "userid": @.$.gcu.username
           "when": new Date().getTime(),
           "version": 1,
-          "data": @data}
+          "data": obj}
           console.log("Send ", data, " to ", @url)
           @$.ajax.body = JSON.stringify(data)
           @$.ajax.go()
