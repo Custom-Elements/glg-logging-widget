@@ -1,6 +1,6 @@
 <link rel="import" href="../node_modules/core-ajax-npm/core-ajax.html">
 <link rel="import" href="https://services.glgresearch.com/ui-toolkit/node_modules/glg-current-user/src/glg-current-user.html">
-<polymer-element name="glg-logging-widget" attributes="channel data url">
+<polymer-element name="glg-logging-widget" attributes="channel n_shards data url">
   <template>
     <glg-current-user id="gcu">
     <core-ajax
@@ -9,7 +9,7 @@
     handleAs="json"
     withCredentials=true
     method="POST"
-    url="{{url}}"
+    url="not-a-real-url"
     on-core-response="{{postHandler}}"
     contentType="application/json">
     </core-ajax>

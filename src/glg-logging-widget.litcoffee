@@ -13,7 +13,8 @@ Otherwise, explicitly set them both and then call ```postData()```
     Polymer 'glg-logging-widget',
 
 ##Attributes
-
+      shard: 0
+      n_shards: 1
 ###channel
 Tag for this data, get written in the wrapper that gets posted with each message
 
@@ -23,11 +24,6 @@ Content to post.  Needs to be JSON.stringify-able
 ###url:
 Destination to post messages to
 
-      channelChanged : ->
-        console.log("Channel is now ", @channel)
-
-      urlChanged : ->
-        console.log("Submit url is now ", @url)
 
 ## Events
 
@@ -37,6 +33,20 @@ Destination to post messages to
         @fire "log-status", event.detail
 
 ## Methods
+
+
+      updateFullUrl : ->
+        fullUrl = @$.ajax.url
+        if @url?
+          fullUrl = @url
+          if @channel?
+            if not fullUrl.endsWith("/")
+              fullUrl += "/"
+            fullUrl += @channel
+          fullUrl += "/"
+          fullUrl += @shard
+          fullUrl += "?no_timestamp=1"
+        fullUrl
 
 ###postData POSTs data to the service
 
@@ -70,19 +80,24 @@ The posted data could look like this:
           data = {"channel": @channel,
           "userid": @.$.gcu.username
           "when": new Date().getTime(),
+          "url": document.URL,
+          "widgetid": @id,
           "version": 1,
           "data": obj}
-          console.log("Send ", data, " to ", @url)
+          @$.ajax.url=@updateFullUrl()
           @$.ajax.body = JSON.stringify(data)
           @$.ajax.go()
         else
           return false
 
 
+
+
 ## Polymer Lifecycle
 
-      created: ->
-        console.log("Created")
-
-      ready: ->
+      attached: ->
+        n_shards = 1
+        if Number(@n_shards) > 0
+          n_shards = Number(@n_shards)
+        @shard = Math.floor(Math.random() * n_shards)
         @postData()
