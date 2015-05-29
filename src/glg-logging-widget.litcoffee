@@ -15,6 +15,7 @@ Otherwise, explicitly set them both and then call ```postData()```
 ##Attributes
       shard: 0
       n_shards: 1
+
 ###channel
 Tag for this data, get written in the wrapper that gets posted with each message
 
@@ -36,16 +37,16 @@ Destination to post messages to
 
 
       updateFullUrl : ->
-        fullUrl = @$.ajax.url
+        fullUrl = @default_url
         if @url?
           fullUrl = @url
-          if @channel?
-            if not fullUrl.endsWith("/")
-              fullUrl += "/"
-            fullUrl += @channel
-          fullUrl += "/"
-          fullUrl += @shard
-          fullUrl += "?no_timestamp=1"
+        if @channel?
+          if not fullUrl.endsWith("/")
+            fullUrl += "/"
+          fullUrl += @channel
+        fullUrl += "/"
+        fullUrl += @shard
+        fullUrl += "?no_timestamp=1"
         fullUrl
 
 ###postData POSTs data to the service
@@ -76,7 +77,7 @@ The posted data could look like this:
       postData : (obj) ->
         if (!obj?)
           obj = @data
-        if obj? && @url?
+        if obj?
           data = {"channel": @channel,
           "userid": @.$.gcu.username
           "when": new Date().getTime(),
@@ -96,6 +97,7 @@ The posted data could look like this:
 ## Polymer Lifecycle
 
       attached: ->
+        @default_url = "http://services.glgresearch.com/logger"
         n_shards = 1
         if Number(@n_shards) > 0
           n_shards = Number(@n_shards)
