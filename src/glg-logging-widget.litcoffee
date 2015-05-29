@@ -97,7 +97,7 @@ The posted data could look like this:
 ## Polymer Lifecycle
 
       attached: ->
-        @default_url = "http://services.glgresearch.com/logger"
+        @default_url = "https://services.glgresearch.com/logger"
         n_shards = 1
         if Number(@n_shards) > 0
           n_shards = Number(@n_shards)
