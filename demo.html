@@ -26,6 +26,15 @@
         <glg-logging-widget channel="glg-logging-widget-demo" data="hello" id="lw2" n_shards="5"/>
     </div>
 
+
+
+    <div>
+      Click <a href="javascript:postOne()">here</a> to make "lw1" post to <label id="lw1_target"></label>
+      <br/>
+      Logger "lw2" automatically posted to <label id="lw2_target"></label>
+    </div>
+
+
     <script>
       document.addEventListener('polymer-ready', function() {
       document.querySelectorAll('glg-logging-widget').array().forEach(
@@ -37,7 +46,13 @@
           })
         })
         // Read the currentuser property when ready.
+        document.querySelector("#lw1_target").innerText = document.querySelector('#lw1').updateFullUrl()
+        document.querySelector("#lw2_target").innerText = document.querySelector('#lw2').updateFullUrl()
       });
+
+      function postOne() {
+        document.querySelector('#lw1').postData({"demo": true})
+      }
     </script>
   </body>
 </html>

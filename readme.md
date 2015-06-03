@@ -1,12 +1,11 @@
 # &lt;glg-logging-widget&gt;
-Wraps data with some metadata (timestamp, current user, channel)
+Wraps data with some metadata (timestamp, current user, channel, widgetid)
 and then posts it as JSON to a logging services
 
 ## usage:
-If ```url``` and ```data``` are both set statically,
-the widget will automatically POST when it is ready.
+If ```data``` is set statically, the widget will automatically POST when it is ready.
 
-Otherwise, explicitly set them both and then call ```postData()```
+Otherwise, explicitly call ```postData()```
 
 ##Attributes
 
